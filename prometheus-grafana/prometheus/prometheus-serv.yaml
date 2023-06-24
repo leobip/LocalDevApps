@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prom-serv
+spec:
+  selector:
+    type: prom
+  type: NodePort
+  ports:
+  - port: 9090
+    name: prom
+    nodePort: 31000

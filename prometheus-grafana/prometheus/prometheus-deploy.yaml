@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: prom
+  template:
+    metadata:
+      name: prom-pod
+      labels:
+        type: prom
+    spec:
+      containers:
+      - name: prom-con
+        image: prom/prometheus
+        volumeMounts:
+        - name: prom-vol
+          mountPath: /prometheus
+      volumes:
+      - name: prom-vol
+        persistentVolumeClaim:
+          claimName: prom-pvc
